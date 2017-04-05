@@ -2,29 +2,47 @@ require 'csv'
 
 namespace :db do
   namespace :seed do
-    desc "Import Maryland Total Residential Sales CSV"
-    task :import_mtrs => :environment do
+    desc "Import Player Dataset"
+    task :import_player => :environment do
 
-      filename = File.join(Rails.root, 'db', 'data_files', 'data.csv')
+      filename = File.join(Rails.root, 'db', 'data_files', 'player_data.csv')
       CSV.foreach(filename, :headers => true) do |row|
         puts $. if $. % 10000 == 0
         values = {
-          :year                 => row['year'],
-          :geo_code             => row['geo_code'],
-          :jurisdiction         => row['jurisdictions'],
-          :zipcode              => row['zipcode'],
-          :total_sales          => row['total_sales'],
-          :median_value         => row['median_value'],
-          :mean_value           => row['mean_value'],
-          :sales_inside_pfa     => row['sales_inside_pfa'],
-          :median_value_in_pfa  => row['median_value_in_pfa'],
-          :mean_value_in_pfa    => row['mean_value_in_pfa'],
-          :sales_outside_pfa    => row['sales_outside_pfa'],
-          :median_value_out_pfa => row['median_value_out_pfa'],
-          :mean_value_out_pfa   => row['mean_value_out_pfa'],
-          :latitude             => row['latitude'],
-          :longitude            => row['longitude']
+          :player_id    => row['player_id']
+          :birth_year   => row['birth_year']
+          :first_name   => row['first_name']
+          :last_name    => row['last_name']
+
         }
-        SalesFigure.create(values)
+        Players.create(values)
       end
     end
+
+    desc "Import Batting Dataset"
+    task :import_batting => :environment do
+
+      filename = File.join(Rails.root, 'db', 'data_files', 'batting_data.csv')
+      CSV.foreach(filename, :headers => true) do |row|
+        puts $. if $. % 10000 == 0
+        values = {
+          :player_id    => row['player_id']
+          :year         => row['year'],
+          :league       => row['league'],
+          :team         => row['team'],
+          :g            => row['g'],
+          :at_bats      => row['at_bats'],
+          :r            => row['R'],
+          :hits         => row['hits'],
+          :doubles      => row['doubles'],
+          :triples      => row['triples'],
+          :home_runs    => row['home_runs'],
+          :rbi          => row['rbi'],
+          :sb           => row['SB'],
+          :cs           => row['CS'],
+        }
+        Batting.create(values)
+      end
+    end
+  end
+end
