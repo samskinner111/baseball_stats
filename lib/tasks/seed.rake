@@ -15,7 +15,7 @@ namespace :db do
           :last_name    => row['last_name']
 
         }
-        Players.create(values)
+        Player.create(values)
       end
     end
 
