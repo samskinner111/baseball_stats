@@ -1,0 +1,87 @@
+<%= form_for(batting) do |f| %>
+  <% if batting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(batting.errors.count, "error") %> prohibited this batting from being saved:</h2>
+
+      <ul>
+      <% batting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :player_id %>
+    <%= f.text_field :player_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :year %>
+    <%= f.number_field :year %>
+  </div>
+
+  <div class="field">
+    <%= f.label :league %>
+    <%= f.text_field :league %>
+  </div>
+
+  <div class="field">
+    <%= f.label :team %>
+    <%= f.text_field :team %>
+  </div>
+
+  <div class="field">
+    <%= f.label :G %>
+    <%= f.number_field :G %>
+  </div>
+
+  <div class="field">
+    <%= f.label :at_bats %>
+    <%= f.number_field :at_bats %>
+  </div>
+
+  <div class="field">
+    <%= f.label :R %>
+    <%= f.number_field :R %>
+  </div>
+
+  <div class="field">
+    <%= f.label :hits %>
+    <%= f.number_field :hits %>
+  </div>
+
+  <div class="field">
+    <%= f.label :doubles %>
+    <%= f.number_field :doubles %>
+  </div>
+
+  <div class="field">
+    <%= f.label :triples %>
+    <%= f.number_field :triples %>
+  </div>
+
+  <div class="field">
+    <%= f.label :home_runs %>
+    <%= f.number_field :home_runs %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rbi %>
+    <%= f.number_field :rbi %>
+  </div>
+
+  <div class="field">
+    <%= f.label :SB %>
+    <%= f.number_field :SB %>
+  </div>
+
+  <div class="field">
+    <%= f.label :CS %>
+    <%= f.number_field :CS %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
