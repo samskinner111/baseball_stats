@@ -4,25 +4,31 @@ class BattingsController < ApplicationController
   # GET /battings
   # GET /battings.json
   def index
-    @battings = Batting.all
+    query1 = Batting.where("team = 'OAK' AND year = 2007 AND home_runs != 0 AND rbi != 0")
+    query2 = Batting.where("at_bats > 200 AND year = 2009 OR year = 2010")
+    query3 = Batting.where("league = 'AL' ")
+    @battings = query1
+    hr, rbi, bat_avg = [], [], []
+    query1.each do |record|
+      hr << record.home_runs
+      rbi << record.rbi
+      bat_avg << record.hits.to_f/record.at_bats.to_f
+    end
+    @max_hr = hr.max_by { |h| h }
+    @max_rbi = rbi.max_by { |rbi| rbi }
+    @max_ba = bat_avg.max_by { |ba| ba }
   end
 
-  # GET /battings/1
-  # GET /battings/1.json
   def show
   end
 
-  # GET /battings/new
   def new
     @batting = Batting.new
   end
 
-  # GET /battings/1/edit
   def edit
   end
 
-  # POST /battings
-  # POST /battings.json
   def create
     @batting = Batting.new(batting_params)
 
@@ -37,8 +43,6 @@ class BattingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /battings/1
-  # PATCH/PUT /battings/1.json
   def update
     respond_to do |format|
       if @batting.update(batting_params)
@@ -51,8 +55,6 @@ class BattingsController < ApplicationController
     end
   end
 
-  # DELETE /battings/1
-  # DELETE /battings/1.json
   def destroy
     @batting.destroy
     respond_to do |format|

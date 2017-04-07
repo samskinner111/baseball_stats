@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Battings</h1>
-
+<h3><%= "The number of records is: #{@battings.length}" %></h3>
+<h3><%= "The max number of home runs is: #{@max_hr}" %></h3>
+<h3><%= "The max number of rbi's is: #{@max_rbi}" %></h3>
+<h3><%= "The highest batting average is: #{@max_ba}" %></h3>
 <table>
   <thead>
     <tr>
@@ -26,7 +29,7 @@
   <tbody>
     <% @battings.each do |batting| %>
       <tr>
-        <td><%= batting.player_id %></td>
+        <td><%= batting.player_id  %></td>
         <td><%= batting.year %></td>
         <td><%= batting.league %></td>
         <td><%= batting.team %></td>
