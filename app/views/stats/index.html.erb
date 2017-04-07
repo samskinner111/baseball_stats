@@ -1,0 +1,29 @@
+<h1>Baseball Stats</h1>
+
+<h2>Query 1: Most improved batting average from 2009 to 2010. </h2>
+
+<h2>Query 2: Slugging percentage for all players on the Oakland A's in 2007. </h2>
+<% @player_slugging_percents.each do |player| %>
+  <%= "Player: #{player[0]}, Slugging Percent: #{number_with_precision(player[1], :precision => 2)}%"  %>
+  <br>
+<% end %>
+
+<h2>Query 3: Who was the AL and NL triple crown winner for 2011 and 2012? </h2>
+<h3><%= "The number of records is: #{@battings.length}" %></h3>
+<h3><%= "The max number of home runs is: #{@max_hr}" %></h3>
+<h3><%= "The max number of rbi's is: #{@max_rbi}" %></h3>
+<h3><%= "The highest batting average is: #{number_with_precision(@max_ba, :precision => 3)}" %></h3>
+<% @player_with_max_hr.each do |player| %>
+  <%= "The player with the most home runs is: #{player.player_id}." %>
+  <br>
+<% end %>
+<br>
+<% @player_with_max_rbi.each do |player| %>
+  <%= "The player with the most rbi's is: #{player.player_id}." %>
+  <br>
+<% end %>
+<br>
+<% @player_with_max_ba.each do |player| %>
+  <%= "The player with the best batting average is: #{player[0]}, #{player[1]}" %>
+  <br>
+<% end %>
