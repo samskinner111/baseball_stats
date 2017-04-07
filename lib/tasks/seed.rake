@@ -9,9 +9,9 @@ namespace :db do
       CSV.foreach(filename, :headers => true) do |row|
         puts $. if $. % 10000 == 0
         values = {
-          :player_id    => row['player_id']
-          :birth_year   => row['birth_year']
-          :first_name   => row['first_name']
+          :player_id    => row['player_id'],
+          :birth_year   => row['birth_year'],
+          :first_name   => row['first_name'],
           :last_name    => row['last_name']
 
         }
@@ -26,20 +26,20 @@ namespace :db do
       CSV.foreach(filename, :headers => true) do |row|
         puts $. if $. % 10000 == 0
         values = {
-          :player_id    => row['player_id']
+          :player_id    => row['player_id'],
           :year         => row['year'],
           :league       => row['league'],
           :team         => row['team'],
-          :g            => row['g'],
+          :G           => row['G'],
           :at_bats      => row['at_bats'],
-          :r            => row['R'],
+          :R           => row['R'],
           :hits         => row['hits'],
           :doubles      => row['doubles'],
           :triples      => row['triples'],
           :home_runs    => row['home_runs'],
           :rbi          => row['rbi'],
-          :sb           => row['SB'],
-          :cs           => row['CS'],
+          :SB           => row['SB'],
+          :CS           => row['CS']
         }
         Batting.create(values)
       end
