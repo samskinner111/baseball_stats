@@ -1,7 +1,37 @@
 class StatsController < ApplicationController
   def index
 ############### Batting Averages
-    query1 = Batting.where("at_bats > 200 AND year = 2009 OR year = 2010")
+    query09 = Batting.where("at_bats > 200 AND year = 2009")
+    query10 = Batting.where("at_bats > 200 AND year = 2010")
+
+    joint = []
+    query09.each do |p|
+      name = p.player_id
+      query10.each do |q|
+        if q.player_id == name
+          joint << q 
+          joint << p
+        end
+      end
+    end
+    list = []
+    joint.each_slice(2) do | p09, p10 |
+      ba09 = p09.hits.to_f/p09.at_bats.to_f
+      ba10 = p10.hits.to_f/p10.at_bats.to_f
+      improvement = ba09/ba10
+      list << [p09.player_id, improvement]
+    end
+    most_improved = ['pup', 0]
+    list.each do |l|
+      if most_improved[1] < l[1]
+        most_improved = l
+      else
+        most_improved
+      end
+    end
+    @jointquery = most_improved
+
+
  ###############
 
 ############### Slugging Percentages
@@ -23,19 +53,31 @@ class StatsController < ApplicationController
     query3 = Batting.where("league = 'AL' AND year = 2012 AND at_bats > 400 ")
     @battings = query3
 
-    hr, rbi, bat_avg = [], [], []
-    query3.each do |record|
-      hr << record.home_runs
-      rbi << record.rbi
-      bat_avg << [record.player_id, record.hits.to_f/record.at_bats.to_f]
-    end
-    @max_hr = hr.max_by { |h| h }
-    @max_rbi = rbi.max_by { |rbi| rbi }
-    @max_ba = bat_avg.max_by { |ba| ba }
-    @player_with_max_hr = Batting.where("home_runs = #{@max_hr} ")
-    @player_with_max_rbi = Batting.where("rbi = #{@max_rbi} ")
-    @player_with_max_ba = bat_avg
+    begin
+      hr, rbi = [], []
+      query3.each do |record|
+        hr << record.home_runs
+        rbi << record.rbi
+      end
+      max_hr = hr.max_by { |h| h }
+      @player_with_max_hr = Batting.where("home_runs = #{max_hr}")
 
+      max_rbi = rbi.max_by { |rbi| rbi }
+      @player_with_max_rbi = Batting.where("rbi = #{max_rbi}")
+    end
+
+    bat_avg = ['o', 0]
+    query3.each do |record|
+      avg = record.hits.to_f/record.at_bats.to_f
+      if avg > bat_avg[1]
+        bat_avg = [record.player_id, avg]
+      else
+        bat_avg
+      end
+      bat_avg
+    end
+    @player_with_best_ba = bat_avg
+    @player_name = Player.where("player_id = '#{bat_avg[0]}' ")
 ###############
   end
 end

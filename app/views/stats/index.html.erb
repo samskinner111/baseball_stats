@@ -1,6 +1,10 @@
 <h1>Baseball Stats</h1>
 
 <h2>Query 1: Most improved batting average from 2009 to 2010. </h2>
+<br>
+<%= "Player: #{@jointquery[0]}, Improvement: #{@jointquery[1]}"%>
+<br>
+
 
 <h2>Query 2: Slugging percentage for all players on the Oakland A's in 2007. </h2>
 <% @player_slugging_percents.each do |player| %>
@@ -8,22 +12,18 @@
   <br>
 <% end %>
 
+
 <h2>Query 3: Who was the AL and NL triple crown winner for 2011 and 2012? </h2>
 <h3><%= "The number of records is: #{@battings.length}" %></h3>
-<h3><%= "The max number of home runs is: #{@max_hr}" %></h3>
-<h3><%= "The max number of rbi's is: #{@max_rbi}" %></h3>
-<h3><%= "The highest batting average is: #{number_with_precision(@max_ba, :precision => 3)}" %></h3>
 <% @player_with_max_hr.each do |player| %>
-  <%= "The player with the most home runs is: #{player.player_id}." %>
+  <%= "The player with the most home runs is: #{player.player_id}, homeruns: #{player.home_runs}" %>
   <br>
 <% end %>
 <br>
 <% @player_with_max_rbi.each do |player| %>
-  <%= "The player with the most rbi's is: #{player.player_id}." %>
+  <%= "The player with the most rbi's is: #{player.player_id}, rbi: #{player.rbi}" %>
   <br>
 <% end %>
 <br>
-<% @player_with_max_ba.each do |player| %>
-  <%= "The player with the best batting average is: #{player[0]}, #{player[1]}" %>
-  <br>
-<% end %>
+<%= "#{@player_with_best_ba[0]} has the best batting average (#{number_with_precision(@player_with_best_ba[1], :precision => 3)})" %>
+<br>
