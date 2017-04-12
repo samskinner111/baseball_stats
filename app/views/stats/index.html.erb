@@ -2,19 +2,22 @@
 
 <h2>Query 1: Most improved batting average from 2009 to 2010. </h2>
 <br>
-<%= "Player: #{@jointquery[0]}, Improvement: #{@jointquery[1]}"%>
+
+<% @player1.each do |player| %>
+  <%= "The most improved player is: #{player.first_name} #{player.last_name}, " %>
+  <%= "who improved by: #{number_with_precision(@stat, :precision => 2)}%" %>
+<% end %>
 <br>
 
 
 <h2>Query 2: Slugging percentage for all players on the Oakland A's in 2007. </h2>
-<% @player_slugging_percents.each do |player| %>
-  <%= "Player: #{player[0]}, Slugging Percent: #{number_with_precision(player[1], :precision => 2)}%"  %>
+<% @trial.each_with_index do |player, index| %>
+  <%= "Player: #{player.first.first_name} #{player.first.last_name}, Slugging Percent: #{number_with_precision(@player_data[index], :precision => 1)}%"  %>
   <br>
 <% end %>
 
 
 <h2>Query 3: Who was the AL and NL triple crown winner for 2011 and 2012? </h2>
-<h3><%= "The number of records is: #{@battings.length}" %></h3>
 <% @player_with_max_hr.each do |player| %>
   <%= "The player with the most home runs is: #{player.player_id}, homeruns: #{player.home_runs}" %>
   <br>
@@ -27,3 +30,6 @@
 <br>
 <%= "#{@player_with_best_ba[0]} has the best batting average (#{number_with_precision(@player_with_best_ba[1], :precision => 3)})" %>
 <br>
+<%= "And the TCW is: #{@player_name.first.first_name} #{@player_name.first.last_name}"%>
+
+

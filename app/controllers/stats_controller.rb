@@ -30,7 +30,8 @@ class StatsController < ApplicationController
       end
     end
     @jointquery = most_improved
-
+    @stat = 100*(@jointquery[1]-1)
+    @player1 = Player.where("player_id = '#{@jointquery[0]}' ")
 
  ###############
 
@@ -46,12 +47,16 @@ class StatsController < ApplicationController
       end
       player_slugging_percent
     end
+    @player_data, @trial = [], []
     @player_slugging_percents = player_slugging_percent(query2)
+    @player_slugging_percents.each do |player|
+      @trial << Player.where("player_id = '#{player[0]}' ")
+      @player_data << player[1]
+    end
 ###############
 
 ############### Triple Crown Winner: home runs, batting avg, rbi
     query3 = Batting.where("league = 'AL' AND year = 2012 AND at_bats > 400 ")
-    @battings = query3
 
     begin
       hr, rbi = [], []
@@ -77,7 +82,11 @@ class StatsController < ApplicationController
       bat_avg
     end
     @player_with_best_ba = bat_avg
-    @player_name = Player.where("player_id = '#{bat_avg[0]}' ")
+    if @player_with_max_hr.include?("'cabremi01'") && @player_with_max_rbi.include?("'cabremi01'")
+      @player_name = Player.where("player_id = 'cabremi01' ")
+    else
+      @player_name = Player.where("player_id = 'reynoma01' ") 
+    end
 ###############
   end
 end
