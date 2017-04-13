@@ -2,4 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-p { font-size: 16px; }
+p { font-size: 14px; }
+
+.section { padding-bottom: 30px;}
+
+#caption {
+  text-align: center;
+  text-decoration: underline;
+}
+
+#info {
+  padding-left: 9%;
+}
+
+#phrase { 
+  padding-top: 18px;
+  padding-left: 7%;
+  font-size: 18px;
+}

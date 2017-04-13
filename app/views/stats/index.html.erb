@@ -1,26 +1,42 @@
-<h1>Baseball Stats</h1>
+<div class='container'>
+  <h1>Baseball Statistics</h1>
 
-<div>
-  <h2>Query 1: Most improved batting average from 2009 to 2010. </h2>
-  <% @mi_player.each do |player| %>
-    <p><%= "The most improved player was: #{player.first_name} #{player.last_name}, " %>
-    <%= "who improved by: #{number_with_precision(@stat, :precision => 2)}%." %></p>
+  <div class="section">
+    <h3>Query 1: Most improved batting average from 2009 to 2010. </h3>
+    <% @mi_player.each do |player| %>
+      <p id="phrase"><%= "The most improved player was: #{player.first_name} #{player.last_name}, " %>
+      <%= "who improved by: #{number_with_precision(@stat, :precision => 2)}%." %></p>
+    <% end %>
+  </div>
+
+  <div class="section">
+  <h3>Query 2: Slugging percentage for all players on the Oakland A's in 2007. </h3>
+    <div class='row'>
+      <div class="col-md-3" id='caption'>
+        <h4><%= "Player" %></h4>
+      </div>
+      <div class="col-md-3" id='caption'>
+        <h4><%= "Slugging Percent" %></h4>
+      </div>
+    </div>
+    <% @player_name.each_with_index do |player, index| %>
+      <div class='row'>
+        <div class="col-md-3" id='info'>
+          <p><%= "#{player.first.first_name} #{player.first.last_name}" %></p>
+        </div>
+        <div class="col-md-3" id='info'>
+          <p><%= "#{number_with_precision(@player_percent[index], :precision => 1)}%"%></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='section'>
+  <h3>Query 3: Who was the AL and NL triple crown winner for 2011 and 2012? </h3>
+  <% if @tcw != [] %>
+    <p id='phrase'><%= "The Triple Crown Winner was: #{@tcw.first.first_name} #{@tcw.first.last_name}!" %></p>
+  <% else %>
+      <p id='phrase'><%= "There was no Triple Crown Winner!" %></p>
   <% end %>
-</div>
-
-<div>
-<h2>Query 2: Slugging percentage for all players on the Oakland A's in 2007. </h2>
-<% @player_name.each_with_index do |player, index| %>
-  <%= "Player: #{player.first.first_name} #{player.first.last_name}, Slugging Percent: #{number_with_precision(@player_percent[index], :precision => 1)}%"  %>
-  <br>
-<% end %>
-</div>
-
-<div>
-<h2>Query 3: Who was the AL and NL triple crown winner for 2011 and 2012? </h2>
-<% if @tcw != [] %>
-  <p><%= "The Triple Crown Winner was: #{@tcw.first.first_name} #{@tcw.first.last_name}!" %></p>
-<% else %>
-    <p><%= "There was no Triple Crown Winner!" %></p>
-<% end %>
+  </div>
 </div>
