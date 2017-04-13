@@ -2,8 +2,7 @@
 
 <h2>Query 1: Most improved batting average from 2009 to 2010. </h2>
 <br>
-
-<% @player1.each do |player| %>
+<% @mi_player.each do |player| %>
   <%= "The most improved player is: #{player.first_name} #{player.last_name}, " %>
   <%= "who improved by: #{number_with_precision(@stat, :precision => 2)}%" %>
 <% end %>
@@ -11,8 +10,8 @@
 
 
 <h2>Query 2: Slugging percentage for all players on the Oakland A's in 2007. </h2>
-<% @trial.each_with_index do |player, index| %>
-  <%= "Player: #{player.first.first_name} #{player.first.last_name}, Slugging Percent: #{number_with_precision(@player_data[index], :precision => 1)}%"  %>
+<% @player_name.each_with_index do |player, index| %>
+  <%= "Player: #{player.first.first_name} #{player.first.last_name}, Slugging Percent: #{number_with_precision(@player_percent[index], :precision => 1)}%"  %>
   <br>
 <% end %>
 
