@@ -1,6 +1,6 @@
 class StatsController < ApplicationController
   def index
-############### Batting Averages
+############## Batting Averages
     query09 = Batting.where("at_bats > 200 AND year = 2009")
     query10 = Batting.where("at_bats > 200 AND year = 2010")
 

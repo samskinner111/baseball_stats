@@ -1,39 +1,22 @@
 <h1>Baseball Stats</h1>
 
 <h2>Query 1: Most improved batting average from 2009 to 2010. </h2>
-<br>
 <% @mi_player.each do |player| %>
-  <%= "The most improved player is: #{player.first_name} #{player.last_name}, " %>
-  <%= "who improved by: #{number_with_precision(@stat, :precision => 2)}%" %>
+  <%= "The most improved player was: #{player.first_name} #{player.last_name}, " %>
+  <%= "who improved by: #{number_with_precision(@stat, :precision => 2)}%." %>
 <% end %>
-<br>
-
+<br><br>
 
 <h2>Query 2: Slugging percentage for all players on the Oakland A's in 2007. </h2>
 <% @player_name.each_with_index do |player, index| %>
   <%= "Player: #{player.first.first_name} #{player.first.last_name}, Slugging Percent: #{number_with_precision(@player_percent[index], :precision => 1)}%"  %>
   <br>
 <% end %>
-
+<br><br>
 
 <h2>Query 3: Who was the AL and NL triple crown winner for 2011 and 2012? </h2>
-<% @player_with_max_hr.each do |player| %>
-  <%= "The player with the most home runs is: #{player.player_id}, homeruns: #{player.home_runs}" %>
-  <br>
-<% end %>
-<br>
-<% @player_with_max_rbi.each do |player| %>
-  <%= "The player with the most rbi's is: #{player.player_id}, rbi: #{player.rbi}" %>
-  <br>
-<% end %>
-<br>
-<%= "#{@player_with_best_ba[0]} has the best batting average (#{number_with_precision(@player_with_best_ba[1], :precision => 3)})" %>
-<br>
 <% if @tcw != [] %>
-  <%= "And the TCW is: #{@tcw.first.first_name} #{@tcw.first.last_name}"%>
+  <%= "The Triple Crown Winner was: #{@tcw.first.first_name} #{@tcw.first.last_name}!" %>
 <% else %>
-    <%= "There is no TCW!" %>
+    <%= "There was no Triple Crown Winner!" %>
 <% end %>
-
-
-
