@@ -69,24 +69,50 @@ class StatsController < ApplicationController
 
       max_rbi = rbi.max_by { |rbi| rbi }
       @player_with_max_rbi = Batting.where("rbi = #{max_rbi}")
+    end   
+
+    @player_with_best_ba = top_batting_average(query3)
+    #find_tcw
+###############
+
+
+    begin
+      tcw = []
+      @player_with_max_hr.each do |player|
+        if player.player_id == @player_with_best_ba[0]
+          tcw << player
+        end
+      end
+      if tcw != []
+        tcw = []
+        @player_with_max_rbi.each do |player|
+          if player.player_id == @player_with_best_ba[0]
+            tcw << player
+          end
+        end
+      end
+      @tcw = tcw
+      unless @tcw == []
+        @tcw = Player.where("player_id = '#{tcw.first.player_id}' ")
+      end
+      @tcw
     end
 
-    bat_avg = ['o', 0]
-    query3.each do |record|
-      avg = record.hits.to_f/record.at_bats.to_f
+  end
+
+  private
+
+  def top_batting_average(players)
+    bat_avg = ['', 0]
+    players.each do |data|
+      avg = data.hits.to_f/data.at_bats.to_f
       if avg > bat_avg[1]
-        bat_avg = [record.player_id, avg]
+        bat_avg = [data.player_id, avg]
       else
         bat_avg
       end
-      bat_avg
     end
-    @player_with_best_ba = bat_avg
-    if @player_with_max_hr.include?("'cabremi01'") && @player_with_max_rbi.include?("'cabremi01'")
-      @player_name = Player.where("player_id = 'cabremi01' ")
-    else
-      @player_name = Player.where("player_id = 'reynoma01' ") 
-    end
-###############
+    bat_avg
   end
+
 end

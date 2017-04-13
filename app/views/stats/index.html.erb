@@ -30,6 +30,11 @@
 <br>
 <%= "#{@player_with_best_ba[0]} has the best batting average (#{number_with_precision(@player_with_best_ba[1], :precision => 3)})" %>
 <br>
-<%= "And the TCW is: #{@player_name.first.first_name} #{@player_name.first.last_name}"%>
+<% if @tcw != [] %>
+  <%= "And the TCW is: #{@tcw.first.first_name} #{@tcw.first.last_name}"%>
+<% else %>
+    <%= "There is no TCW!" %>
+<% end %>
+
 
 
