@@ -4,7 +4,7 @@
   <div class="section">
     <h3>Query 1: Most improved batting average from 2009 to 2010. </h3>
     <% @mi_player.each do |player| %>
-      <p id="phrase"><%= "The most improved player was: #{player.first_name} #{player.last_name}, " %>
+      <p id="phrase"><%= "The most improved player was #{player.first_name} #{player.last_name}, " %>
       <%= "who improved by: #{number_with_precision(@stat, :precision => 2)}%." %></p>
     <% end %>
   </div>
@@ -34,7 +34,7 @@
   <div class='section'>
   <h3>Query 3: Who was the AL and NL triple crown winner for 2011 and 2012? </h3>
   <% if @tcw != [] %>
-    <p id='phrase'><%= "The Triple Crown Winner was: #{@tcw.first.first_name} #{@tcw.first.last_name}!" %></p>
+    <p id='phrase'><%= "The Triple Crown Winner was #{@tcw.first.first_name} #{@tcw.first.last_name}!" %></p>
   <% else %>
       <p id='phrase'><%= "There was no Triple Crown Winner!" %></p>
   <% end %>
