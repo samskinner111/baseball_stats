@@ -1,8 +1,6 @@
 class BattingsController < ApplicationController
   before_action :set_batting, only: [:show, :edit, :update, :destroy]
 
-  # GET /battings
-  # GET /battings.json
   def index
     query1 = Batting.where("team = 'OAK' AND year = 2007 AND home_runs != 0 AND rbi != 0")
     query2 = Batting.where("at_bats > 200 AND year = 2009 OR year = 2010")
@@ -64,7 +62,7 @@ class BattingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_batting
       @batting = Batting.find(params[:id])
     end
