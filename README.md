@@ -25,7 +25,7 @@ psql < db/rebuild_development.sql
 
 ### Database Import ###
 
-To import the csv database, place the datafiles in a folder "data_files" inside "db".  Then run the following rake task.  (Note this assumes the csv file has been cleaned up, with header names as indicated in the rake task.)
+To import the csv databases, place the datafiles in a folder "data_files" inside "db".  Then run the following rake task.  (Note this assumes the csv file has been cleaned up, with header names as indicated in the rake task.)
 
 rake db:seed:import_players
 rake db:seed:import_batting
