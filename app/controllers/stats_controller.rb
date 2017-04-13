@@ -9,8 +9,7 @@ class StatsController < ApplicationController
 
     @mi_player = Player.where("player_id = '#{most_improved[0]}' ")  #find player's name
     @stat = 100*(most_improved[1]-1)  ## convert to percentage
- ###############
-
+###############
 ############### Slugging Percentages
     query1 = Batting.where("team = 'OAK' AND year = 2007 AND home_runs != 0 AND rbi != 0")
 
@@ -22,14 +21,13 @@ class StatsController < ApplicationController
       @player_percent << player[1]
     end
 ###############
-
 ############### Triple Crown Winner: home runs, batting avg, rbi
-    query_tcw = Batting.where("league = 'AL' AND year = 2012 AND at_bats > 400 ")
+    query2 = Batting.where("league = 'AL' AND year = 2012 AND at_bats > 400 ")
 
-    @player_with_max_hr = find_players_with_most_homeruns(query_tcw)
-    @player_with_max_rbi = find_players_with_most_rbi(query_tcw)  
-    @player_with_best_ba = top_batting_average(query_tcw)
-    
+    @player_with_max_hr = find_players_with_most_homeruns(query2)
+    @player_with_max_rbi = find_players_with_most_rbi(query2)  
+    @player_with_best_ba = top_batting_average(query2)
+
     @tcw = find_tcw
 ###############
   end
