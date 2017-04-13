@@ -12,4 +12,4 @@ Here I wanted to demo the import process (or one way to do it).  Further, for an
 
 4) I have minimally styled the Stats view page.  For me the fun part of this particular project was working out the methods for pulling the appropriate data from the two data tables and massaging it into useable form.
 
-5) Thanks for reviewing my code.  I would love the opportunity to work at SpringBot!
+5) This was a fun project!  Thanks for reviewing my code.  I would love the opportunity to work at Springbot!
